@@ -102,8 +102,8 @@ silence_thresh = int(os.environ.get("SILENCE_THRESH", -70))   # Provide defaults
 max_bitrates = {
     "mp3": "320k",
     "aac": "320k",
-    "wav": "",
-    "flac": "",
+    "wav": None,
+    "flac": None,
     "ogg": "500k",
 }
 
@@ -155,7 +155,7 @@ try:
         if not output_bitrate: # Determine bitrate if not specified
             output_bitrate = max_bitrates.get(output_format, "320k") # Use format-specific max or fallback
 
-        if output_bitrate:
+        if output_bitrate is not None:
             chunk.export(output_path, format=output_format, bitrate=output_bitrate)
         else:
             chunk.export(output_path, format=output_format)

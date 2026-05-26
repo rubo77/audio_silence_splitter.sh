@@ -99,7 +99,7 @@ num_chunks = int(os.environ.get("NUM_CHUNKS"))
 verbose = os.environ.get("VERBOSE") == "true"
 min_silence_len = int(os.environ.get("MIN_SILENCE_LEN", 1000)) # Provide defaults
 silence_thresh = int(os.environ.get("SILENCE_THRESH", -70))   # Provide defaults
-max_bitrates = {
+format_bitrates = {
     "mp3": "320k",
     "aac": "320k",
     "wav": None,
@@ -153,7 +153,7 @@ try:
 
         output_bitrate = os.environ.get("OUTPUT_BITRATE")
         if not output_bitrate: # Determine bitrate if not specified
-            output_bitrate = max_bitrates.get(output_format, "320k") # Use format-specific max or fallback
+            output_bitrate = format_bitrates.get(output_format, "320k") # Use format-specific max or fallback
 
         if output_bitrate is not None:
             chunk.export(output_path, format=output_format, bitrate=output_bitrate)
